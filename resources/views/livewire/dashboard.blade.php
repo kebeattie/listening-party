@@ -90,15 +90,16 @@ new class extends Component {
                                             <p class="text-slate-400 uppercase tracking-tighter text-[0.7rem]">{{$listeningParty->episode->podcast->title}}</p>
                                         </div>
                                         <div class="text-xs text-slate-600 mt-1" x-data="{
-                                            startTime: '{{$listeningParty->start_time->timestamp}}',
+                                                startTime: {{$listeningParty->start_time->timestamp}},
                                             countDownText: '',
-                                            isLive: '{{$listeningParty->start_time->isPast() && $listeningParty->is_active ? 'true': 'false'}}',
+                                            isLive: false,
                                             updateCountdown() {
                                                 const now = Math.floor(Date.now()/1000);
                                                 const timeUntilStart = this.startTime - now;
                                                 if (timeUntilStart <= 0) {
                                                     this.isLive = true;
                                                 } else {
+                                                    this.isLive = false;
                                                     const days = Math.floor(timeUntilStart / 86400);
                                                     const hours = Math.floor((timeUntilStart % 86400) / 3600);
                                                     const minutes = Math.floor((timeUntilStart % 3600) / 60);
